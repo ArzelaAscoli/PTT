@@ -14,9 +14,9 @@ if __name__ == '__main__':
     page = getPage.get_current_page(PTT+URL)
     title = getData.get_current_title(page)
     date = getData.get_date(page)
-    getData.pageToJSON(page)
+    page_data = getData.pageToJSONArray(page)
+    page_today = getPage.get_today_page()
 
-
-    # print(page)
+    print(page_today)
     # title = getData.get_title(page, )
 

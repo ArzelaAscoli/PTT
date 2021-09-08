@@ -1,3 +1,4 @@
+import time
 import requests
 from bs4 import BeautifulSoup
 
@@ -26,3 +27,6 @@ class PageInfo:
         href = btn[0]("a")[1]["href"]
         # print(href)
         return self.get_current_page(self.domain+url)
+
+    def get_today_page(self):
+        pass

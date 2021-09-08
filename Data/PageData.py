@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import json
 
 class PageData:
     def __init__(self):
@@ -24,13 +25,24 @@ class PageData:
         # print("check B") 
         return date
 
-    def pageToJSON(self, page):
+    def pageToJSONArray(self, page):
         bs = BeautifulSoup(page, "html.parser")
-        article = bs.find_all("div", "author")
-        date = bs.find_all("div", "date")
-        title = bs.find_all("div", "title")
+        author = bs.find_all("div", {"class": "author"})
+        date = bs.find_all("div", {"class": "date"})
+        title = bs.find_all("div", {"class": "title"})
 
+        # print(title[0].text)
+        result = []
         information = dict()
+        for index in range(len(date)):
+            information['author'] = author[index].get_text()
+            information['date'] = date[index].get_text()
+            information['title'] = title[index].get_text().replace("\n", "")
+            # information['href'] = title[0]('a')[0]["href"]
+            # print(information)
+            # print(json.dumps(information, ensure_ascii=False))
+            result.append(json.dumps(information, ensure_ascii=False))
 
-        print(article, date, title)
+        print(result)
+        return result
 
