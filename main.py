@@ -21,7 +21,7 @@ def get_today_article():
     getData = PageData.PageData()
     today = time.strftime("%m/%d", time.localtime()).lstrip("0")
 
-    current_page = getPage.get_page(PTT+URL)
+    current_page = getPage.get_page(PTT+URL) # get current page
     page_data = getData.pageToJSONArray(current_page)
     page_data = remove_button(page_data)
 
@@ -31,24 +31,26 @@ def get_today_article():
 
     count = 1
     flag = True
-    while flag:
+    while flag: # previous page
         prev_url = getPage.get_prev_page_url(current_page)
         current_page = getPage.get_page(PTT+prev_url)
         page_data_temp = getData.pageToJSONArray(current_page)
-        for item in page_data_temp:
-            if json.loads(item)["date"] != today:
-                page_data_temp = page_data_temp[page_data_temp.index(item):]
-                page_data = page_data_temp + page_data
-                flag = False
-                break
-                
+
+        if json.loads(page_data_temp[0])["date"] != today:
+            for item in page_data_temp:
+                if json.loads(item)["date"] == today:
+                    page_data_temp = page_data_temp[page_data_temp.index(item):]
+                    page_data = page_data_temp + page_data
+                    flag = False
+                    break
+        else:
+            page_data = page_data_temp + page_data
+
         count = count +1
         print("check")
-        page_data = page_data_temp + page_data
-
-    print(count)        
+        
+    print(count)
     return page_data
-
 
 
 if __name__ == '__main__':
