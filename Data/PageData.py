@@ -1,12 +1,13 @@
 from bs4 import BeautifulSoup
 import json
 
+
 class PageData:
     def __init__(self):
         pass
 
     def get_current_title(self, page):
-        bs = BeautifulSoup(page, "html.parser") 
+        bs = BeautifulSoup(page, "html.parser")
         titles = bs.find_all("div", "title")
         return titles
         # url = titles[0]("a")[0]["href"]

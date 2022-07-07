@@ -2,8 +2,6 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-# from Data import PageData
-
 
 class PageInfo:
 
@@ -19,8 +17,6 @@ class PageInfo:
             print("check A")
             return None
         else:
-            
-
             return response.text
 
     def get_prev_page_url(self, page):

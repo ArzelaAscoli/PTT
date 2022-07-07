@@ -3,7 +3,6 @@ import time
 from Page import PageInfo
 from Data import PageData
 
-
 PTT = "https://www.ptt.cc"
 URL = "/bbs/Gossiping/index.html"
 
@@ -46,16 +45,17 @@ def get_today_article():
         else:
             page_data = page_data_temp + page_data
 
-        count = count +1
-        print("check")
+        count = count + 1
+        print(".", end="")
         
-    print(count)
+    print("{} pages.".format(count))
     return page_data
 
 
 if __name__ == '__main__':
 
     print("=== Let's go to Gossiping ===")
+    print("Waiting", end="")
     getPage = PageInfo.PageInfo()
     getData = PageData.PageData()
 
